@@ -46,7 +46,7 @@ pheno_val_table <- reactive({
   traits_with_cols <- intersect(get_measured_traits(), colnames(gwas))
   validate(need(length(traits_with_cols) > 0, 
                 paste("No traits from .descriptions are column names in",
-                      ".gwas_phenotypes; please update database)")))
+                      ".gwas_phenotypes; please update database")))
   gwas[,c("cohort", "sex", "rfid", traits_with_cols)]
 })
 
