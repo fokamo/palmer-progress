@@ -104,11 +104,16 @@ tables_by_schema <- aggregate(tablename ~ schemaname, catalog, unique)
 # all the different project names in the data
 projects <- sort(unique(c(catalog$schemaname, individual_progress$project_name, 
                           project_progress_complete$project_name,
-                          project_meta$project_name)),decreasing = TRUE)
+                          project_meta$project_name, sample_meta$project_name)),
+                 decreasing = TRUE)
 
 # turn sample meta table into one that matches project names to organism/strain
 sample_meta <- aggregate(cbind(organism,strain) ~ project_name, 
                          sample_meta, unique)
+# deal with projects missing in sample_metadata
+sample_meta <- rbind(sample_meta, data.frame(
+  project_name = projects[!(projects %in% sample_meta$project_name)],
+  organism = "missing", strain = "missing"))
 sample_meta$animal_type <- paste(sample_meta$organism, "-", sample_meta$strain)
 
 # helper functions for using meta-info ----
