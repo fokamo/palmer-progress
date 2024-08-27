@@ -1,4 +1,7 @@
 # palmer-progress
+
+**NO LONGER USED** - this app was replaced by a different one. Repository kept for my amusement.
+
 Shiny App to help with progress tracking
 
 The live version of the site may be seen at https://shiny.ratgenes.org/palmer-progress/
